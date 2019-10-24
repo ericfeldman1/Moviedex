@@ -1,12 +1,16 @@
 require('dotenv').config()
 const express = require('express')
 const morgan = require('morgan')
+const cors = require('cors')
+const helmet = require('helmet')
 const MOVIEDEX = require('./moviedex.json')
 
 const app = express()
 
-// First middelware - runs on every route
+// First middelwares - runs on every route
 app.use(morgan('dev'))
+app.use(cors())
+app.use(helmet())
 
 // Second middleware - runs on every route
 app.use(function validateBearerToken(req, res, next) {
